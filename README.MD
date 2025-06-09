@@ -5,18 +5,23 @@ O projeto foi desenvolvido em **C# com .NET**, criando um **CRUD** para cadastro
 A aplicação realiza a conexão com o banco de dados através de uma biblioteca chamada **Entity Framework**, permitindo operações de **adição**, **atualização** e **deleção** de dados.  
 Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvidos em aula.
 
----
 
 ## 👨‍💻 Integrantes
 
-- Vanessa Feliciano Ugioni - [vanessaugioni](https://github.com/vanessaugioni)  
-- Karine 
-- Gabriel 
-- Beatriz 
-- Keller
-- Ana
+- Vanessa Ugioni - [vanessaugioni](https://github.com/vanessaugioni)  
+- Karine - [karine285](https://github.com/karine285)  
+- Gabriel - [gabrieelrrocha](https://github.com/gabrieelrrocha)  
+- Beatriz - [sabtl](https://github.com/sabtl)  
+- Keller - [Keler1606](https://github.com/Keler1606)  
+- Ana Paula - [anapaulagesser](https://github.com/anapaulagesser)  
 
----
+...
+
+## Modelo Físico
+
+Utilizamos a ferramenta de modelagem de dados [dbdiagram.io](https://dbdiagram.io/d/683e357061dc3bf08d3ad679) para criação do modelo físico do banco de dados, para posterior exportação dos scripts DDL das tabelas e relacionamentos.
+
+![alt text](image.png)
 
 ## 💻 Tecnologias Utilizadas
 
@@ -25,13 +30,11 @@ Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvi
 - DBdiagram.io
 - Visual Studio Code
 
----
-
 ## ⚙️ Funcionalidades
 
-- pendente
+- Pendente
 
----
+
 
 ## 📝 Observações
 
