@@ -11,7 +11,7 @@ Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvi
 - Vanessa Ugioni - [vanessaugioni](https://github.com/vanessaugioni)  
 - Karine - [karine285](https://github.com/karine285)  
 - Gabriel - [gabrieelrrocha](https://github.com/gabrieelrrocha)  
-- Beatriz - [sabtl](https://github.com/sabtl)  
+- Sabrina - [sabtl](https://github.com/sabtl)  
 - Keller - [Keler1606](https://github.com/Keler1606)  
 - Ana Paula - [anapaulagesser](https://github.com/anapaulagesser)  
 
