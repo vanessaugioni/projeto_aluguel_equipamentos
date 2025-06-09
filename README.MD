@@ -1,4 +1,4 @@
-### Projeto alocação de equipamentos - Grupo C
+## Projeto alocação de equipamentos - Grupo C
 
 Este projeto consiste na criação de um **modelo físico de um banco de dados** para um sistema XYZ.  
 O projeto foi desenvolvido em **C# com .NET**, criando um **CRUD** para cadastro dos itens XYZ.  
