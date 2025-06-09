@@ -1,4 +1,4 @@
-## Projeto alocação de equipamentos - Grupo C
+### Projeto alocação de equipamentos - Grupo C
 
 Este projeto consiste na criação de um **modelo físico de um banco de dados** para um sistema XYZ.  
 O projeto foi desenvolvido em **C# com .NET**, criando um **CRUD** para cadastro dos itens XYZ.  
@@ -6,7 +6,7 @@ A aplicação realiza a conexão com o banco de dados através de uma biblioteca
 Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvidos em aula.
 
 
-### 👨‍💻 Integrantes
+#### 👨‍💻 Integrantes
 
 - Vanessa Ugioni - [vanessaugioni](https://github.com/vanessaugioni)  
 - Karine - [karine285](https://github.com/karine285)  
