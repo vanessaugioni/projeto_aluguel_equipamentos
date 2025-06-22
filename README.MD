@@ -20,24 +20,26 @@ Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvi
 ### Modelo Físico
 
 Utilizamos a ferramenta de modelagem de dados [dbdiagram.io](https://dbdiagram.io/d/683e357061dc3bf08d3ad679) para criação do modelo físico do banco de dados, para posterior exportação dos scripts DDL das tabelas e relacionamentos.
+Arquivo fonte:[Modelo físico](https://dbdiagram.io/d/683e357061dc3bf08d3ad679)
 
 ![alt text](image.png)
 
 
-###  💻 Tecnologias Utilizadas
 
-- PHP
-- SQL Server
-- DBdiagram.io
-- Visual Studio Code
+### Dicionário de dados
 
-### ⚙️ Funcionalidades
-
-- Pendente
+As informações sobre as tabelas e índices foram documentados na planilha colocar link aqui!!!!!
 
 
+### Scripts SQL
 
-### 📝 Observações
+Para este projeto foi utilizado o banco de dados Azure SQL
 
-Este projeto foi desenvolvido com fins educacionais para aplicação prática dos conceitos aprendidos na disciplina de Banco de Dados, incluindo modelagem de banco de dados, comandos SQL e uso do Entity Framework no ambiente .NET.
+Abaixo, segue os scripts SQL separados por tipo:
 
+Tabelas
+Índices
+Gatilhos
+Procedimentos armazenados
+Funções
+DML
