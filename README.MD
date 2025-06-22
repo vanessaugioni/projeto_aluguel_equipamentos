@@ -1,7 +1,7 @@
 ## Projeto alocação de equipamentos - Grupo C
 
-Este projeto consiste na criação de um **modelo físico de um banco de dados** para um sistema XYZ.  
-O projeto foi desenvolvido em **C# com .NET**, criando um **CRUD** para cadastro dos itens XYZ.  
+Este projeto consiste na criação de um **modelo físico de um banco de dados** para um sistema de alocação de equipamento.  
+O projeto foi desenvolvido em **com PHP**, criando um **CRUD** para cadastro dos clientes, que são as empresas que contratam nossos serviços.  
 A aplicação realiza a conexão com o banco de dados através de uma biblioteca chamada **Entity Framework**, permitindo operações de **adição**, **atualização** e **deleção** de dados.  
 Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvidos em aula.
 
@@ -22,6 +22,7 @@ Foram utilizados todos os conceitos e dinâmicas práticas de **SQL** desenvolvi
 Utilizamos a ferramenta de modelagem de dados [dbdiagram.io](https://dbdiagram.io/d/683e357061dc3bf08d3ad679) para criação do modelo físico do banco de dados, para posterior exportação dos scripts DDL das tabelas e relacionamentos.
 
 ![alt text](image.png)
+
 
 ###  💻 Tecnologias Utilizadas
 
