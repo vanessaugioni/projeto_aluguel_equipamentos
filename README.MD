@@ -91,8 +91,7 @@ Aplicação funcional com CRUD:
 ...
 
 ### 📊 Relatório Final 
-O relatório final está disponível no arquivo relatorio-final/template1.docx.
-
+[➡️ Acesse o Relatório PDF - Final](./relatorio_final/Relatório%20PDF%20-%20Versão%20final.pdf)
 ...
 
 ### 🎞️ Slide apresentação
