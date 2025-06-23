@@ -18,7 +18,7 @@ Somos uma empresa que oferece a alocação de equipamentos e periféricos, como 
 - Keller - [Keler1606](https://github.com/Keler1606)  
 - Ana Paula - [anapaulagesser](https://github.com/anapaulagesser)  
 
----
+...
 
 ### 🗂 Modelo Físico
 
@@ -28,13 +28,13 @@ Arquivo fonte: [Modelo físico](https://dbdiagram.io/d/683e357061dc3bf08d3ad679)
 
 ![alt text](image.png)
 
----
+...
 
 ### 📖 Dicionário de dados
 
 As informações sobre as tabelas e índices foram documentados na planilha colocar link aqui!!!!!
 
----
+...
 
 ### 💾 Scripts SQL
 
@@ -49,12 +49,12 @@ Abaixo, segue os scripts SQL separados por tipo:
 - [Funções;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/funcoes)
 - [DML;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/dml)
 
----
+...
 
 ### 💻 Código Fonte do CRUD
 
 
----
+...
 
 ### 🛠️ Ferramentas utilizadas
 
@@ -64,9 +64,23 @@ Abaixo, segue os scripts SQL separados por tipo:
 - Google docs (relatório final); 
 - Google apresentação (slide); 
 - Wpp e Meet (Comunicação interna)
-- Github (repositpório e board de issues)
+- Github (repositório e board de issues)
+- Google AI Studio (conferência de dados, resumo e explicações e apoio na conectividade do banco)
 
----
+...
 
 ### 📊 Relatório Final 
 O relatório final está disponível no arquivo relatorio-final/template1.docx.
+
+...
+
+### 📊 Referências
+
+- Vídeo: [Baixando e instalando o SQL Server Express e o SSMS (SQL Server Management Studio).](https://www.youtube.com/watch?v=BwnemvVholw&list=PLW83fkbt3BqmKH24X2ssolU1nWwIl-DUa)
+- Vídeo: [Instalação do SQL Server 2022 e SSMS no Windows](https://www.youtube.com/watch?v=QOXiRS1yWhE)
+- Vídeo: [Aprenda git em 30 minutos - os principais comandos git](https://www.youtube.com/watch?v=Zwv9qRyVeU4)
+- Vídeo: [12 dicas de Boas Práticas em Modelagem de Dados](https://www.youtube.com/watch?v=ppA649f48e8) | Ví só algumas partes
+- Site: [O que é a normalização de bases de dados e como fazê-la?](https://ebaconline.com.br/blog/normalizacao-de-bases-de-dados)
+- Site: [Índices clusterizados e não clusterizados](https://learn.microsoft.com/pt-br/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described?view=sql-server-ver17)
+- Site: [Otimizando o SQL Server: Compreendendo loops aninhados, correspondência de hash, junção de mesclagem e junção adaptável](https://rafaelrampineli.medium.com/optimizing-sql-server-joins-understanding-nested-loops-hash-match-merge-join-and-adaptive-join-5ba57fcf6ec3)
+- Material: [Slides da aula (quase todos com script)](https://www1.satc.edu.br/portais/alunos/index.php/conteudos/exibir_conteudo?i_classe=MkY1RGtuRjB6ekwzaWI5Nzd6djc3dlNSQjRYbjhZSlJaN3REblR6cFRLV08vMTBZWkJ4TlQvSURuTmFVOEF5Y1ZUZjJVTUpLR1pxcTBMK2pHN1MxUXc9PQ==&i_conteudo=em9DTTdFLzh3RVVuVmtnbFpZN0tRL3oxT1psc215ZFppNXU4dk9jQ2lVRlcxOFlZejQzMklHM1pGQ0VJTW1ZWlRwUnlhZXRwTzBxblovSDMwUU9SakE9PQ==)
