@@ -81,17 +81,17 @@ GO
 SET IDENTITY_INSERT equipamento ON
 GO
 INSERT equipamento (id_equipamento, nome_equipamento, descricao, numero_serie, status, id_tipo_equipamento, criado_em) VALUES
-(1, 'Dell Inspiron 15', 'Notebook Dell para uso geral', 'SN12345DELL', 'disponivel', 1, GETDATE()),
-(2, 'Samsung SyncMaster 24"', 'Monitor LED 24 polegadas Samsung', 'SN54321SAM', 'disponivel', 2, GETDATE()),
-(3, 'HP LaserJet Pro', 'Impressora a laser HP para escritório', 'SN67890HP', 'disponivel', 3, GETDATE()),
-(4, 'Logitech MX Master 3', 'Mouse sem fio avançado Logitech', 'SN98765LOG', 'disponivel', 4, GETDATE()),
-(5, 'Microsoft Ergonomic Keyboard', 'Teclado ergonômico Microsoft', 'SN11223MIC', 'disponivel', 5, GETDATE()),
-(6, 'Cisco Catalyst 2960', 'Switch de rede Cisco para ambientes corporativos', 'SN44556CIS', 'disponivel', 6, GETDATE()),
-(7, 'Dell PowerEdge T40', 'Servidor torre para pequenas empresas', 'SN77889DEL', 'disponivel', 7, GETDATE()),
-(8, 'Epson PowerLite X39', 'Projetor multimídia Epson', 'SN99001EPS', 'disponivel', 8, GETDATE()),
-(9, 'APC Back-UPS 600', 'Nobreak APC para proteção contra queda de energia', 'SN22334APC', 'disponivel', 9, GETDATE()),
-(10, 'Logitech C920', 'Webcam HD para videoconferência', 'SN55667LOG', 'disponivel', 10, GETDATE()),
-(11, 'Canon CanoScan Lide 300', 'Scanner para documentos A4 Canon', 'SN88990CAN', 'disponivel', 11, GETDATE())
+(1, 'Lenovo ThinkPad X1', 'Notebook empresarial da Lenovo', 'SN0012LEN', 'Disponível', 1, '2025-06-11 10:00:00'),
+(2, 'Asus VivoBook 15', 'Notebook Asus para uso geral', 'SN0013ASU', 'Disponível', 1, '2025-06-10 10:00:00'),
+(3, 'HP EliteBook 840', 'Notebook de alta performance HP', 'SN0014HP', 'Disponível', 1, '2025-06-09 10:00:00'),
+(4, 'MacBook Pro 14"', 'Notebook Apple para desenvolvedores', 'SN0015MAC', 'Disponível', 1, '2025-06-08 10:00:00'),
+(5, 'Dell Latitude 7420', 'Notebook corporativo Dell', 'SN0016DEL', 'Disponível', 1, '2025-06-07 10:00:00'),
+(6, 'Samsung Book i7', 'Notebook Samsung com bom custo-benefício', 'SN0017SAM', 'Disponível', 1, '2025-06-06 10:00:00'),
+(7, 'Acer Aspire 5', 'Notebook Acer para tarefas diárias', 'SN0018ACE', 'Disponível', 1, '2025-06-05 10:00:00'),
+(8, 'Positivo Motion Q', 'Notebook básico nacional', 'SN0019POS', 'Disponível', 1, '2025-06-04 10:00:00'),
+(9, 'LG Gram 16', 'Notebook ultraleve LG', 'SN0020LG', 'Disponível', 1, '2025-06-03 10:00:00'),
+(10, 'Microsoft Surface Laptop', 'Notebook Microsoft premium', 'SN0021MIC', 'Disponível', 1, '2025-06-02 10:00:00'),
+(11, 'Avell LIV A52', 'Notebook gamer brasileiro', 'SN0022AVE', 'Disponível', 1, '2025-06-01 10:00:00')
 GO
 SET IDENTITY_INSERT equipamento OFF
 GO
@@ -141,25 +141,17 @@ GO
 SET IDENTITY_INSERT manutencao ON
 GO
 INSERT manutencao (id_manutencao, id_equipamento, id_agente, data_inicio, data_fim, descricao, tipo, status) VALUES
-(1, 1, 1, DATEADD(day, -15, GETDATE()), NULL, 'Substituição de teclado danificado', 'preventiva', 'pendente'),
-(2, 2, 2, DATEADD(day, -10, GETDATE()), DATEADD(day, -5, GETDATE()), 'Troca de cartucho de toner', 'corretiva', 'finalizada'),
-(3, 3, 3, DATEADD(day, -8, GETDATE()), NULL, 'Atualização de firmware', 'preventiva', 'pendente'),
-(4, 4, 4, DATEADD(day, -20, GETDATE()), DATEADD(day, -15, GETDATE()), 'Reparo de cabo HDMI', 'corretiva', 'finalizada'),
-(5, 5, 5, DATEADD(day, -5, GETDATE()), NULL, 'Limpeza interna completa', 'preventiva', 'pendente'),
-(6, 6, 6, DATEADD(day, -12, GETDATE()), DATEADD(day, -7, GETDATE()), 'Substituição de switch defeituoso', 'corretiva', 'finalizada'),
-(7, 7, 7, DATEADD(day, -3, GETDATE()), NULL, 'Verificação de hardware', 'preventiva', 'pendente'),
-(8, 8, 8, DATEADD(day, -18, GETDATE()), DATEADD(day, -10, GETDATE()), 'Ajuste de foco do projetor', 'corretiva', 'finalizada'),
-(9, 9, 9, DATEADD(day, -7, GETDATE()), NULL, 'Troca de bateria do nobreak', 'preventiva', 'pendente'),
-(10, 10, 10, DATEADD(day, -14, GETDATE()), DATEADD(day, -9, GETDATE()), 'Limpeza e manutenção geral', 'corretiva', 'finalizada'),
-(11, 11, 11, DATEADD(day, -9, GETDATE()), NULL, 'Digitalização de documentos com scanner', 'preventiva', 'pendente')
-(12, 1, 2, DATEADD(DAY, -10, GETDATE()), NULL, 'Troca de teclado', 'corretiva', 'pendente'),
-(13, 1, 3, DATEADD(DAY, -30, GETDATE()), NULL, 'Atualização de sistema', 'preventiva', 'pendente'),
-(14, 1, 4, DATEADD(DAY, -45, GETDATE()), NULL, 'Substituição de HD', 'corretiva', 'pendente'),
-(15, 12, 1, DATEADD(DAY, -5, GETDATE()), NULL, 'Manutenção em porta USB', 'corretiva', 'pendente'),
-(16, 12, 2, DATEADD(DAY, -20, GETDATE()), NULL, 'Reinstalação do Windows', 'preventiva', 'pendente'),
-(17, 13, 3, DATEADD(DAY, -12, GETDATE()), NULL, 'Substituição de bateria', 'corretiva', 'pendente'),
-(18, 13, 4, DATEADD(DAY, -18, GETDATE()), NULL, 'Manutenção de tela', 'corretiva', 'pendente'),
-(19, 1, 1, DATEADD(day, -15, GETDATE()), NULL, 'Substituição de teclado danificado', 'preventiva', 'finalizada'),
+(1, 1, 2, '2025-05-30 10:00:00', NULL, 'Troca de teclado', 'Corretiva', 'Pendente'),
+(2, 2, 3, '2025-05-28 10:00:00', NULL, 'Atualização de sistema', 'Corretiva', 'Pendente'),
+(3, 3, 4, '2025-05-26 10:00:00', NULL, 'Substituição de HD', 'Corretiva', 'Concluída'),
+(4, 4, 5, '2025-05-24 10:00:00', NULL, 'Manutenção em porta USB', 'Corretiva', 'Pendente'),
+(5, 5, 6, '2025-05-22 10:00:00', NULL, 'Reinstalação do Windows', 'Corretiva', 'Pendente'),
+(6, 6, 7, '2025-05-20 10:00:00', NULL, 'Substituição de bateria', 'Corretiva', 'Pendente'),
+(7, 7, 8, '2025-05-18 10:00:00', NULL, 'Manutenção de tela', 'Corretiva', 'Concluída'),
+(8, 8, 9, '2025-05-16 10:00:00', NULL, 'Limpeza de cooler', 'Corretiva', 'Pendente'),
+(9, 9, 10, '2025-05-14 10:00:00', NULL, 'Upgrade de memória RAM', 'Corretiva', 'Pendente'),
+(10, 10, 11, '2025-05-12 10:00:00', NULL, 'Troca de pasta térmica', 'Corretiva', 'Pendente'),
+(11, 11, 1, '2025-05-10 10:00:00', NULL, 'Verificação de desempenho', 'Corretiva', 'Concluída')
 GO
 SET IDENTITY_INSERT manutencao OFF
 GO

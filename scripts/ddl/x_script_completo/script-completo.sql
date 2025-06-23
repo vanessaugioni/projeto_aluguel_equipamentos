@@ -54,11 +54,13 @@ CREATE TABLE equipamento (
     nome_equipamento VARCHAR(100) NOT NULL,
     descricao VARCHAR(255),
     numero_serie VARCHAR(50) NOT NULL UNIQUE,
-    status VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'Disponível',
     id_tipo_equipamento INT NOT NULL FOREIGN KEY REFERENCES tipo_equipamento(id_tipo_equipamento),
-    criado_em DATETIME
+    criado_em DATETIME DEFAULT GETDATE(),
+    CONSTRAINT chk_status_equipamento CHECK (status IN ('Disponível', 'Indisponível'))
 );
 GO
+
 
 CREATE TABLE locacao (
     id_locacao INT PRIMARY KEY IDENTITY(1,1),
@@ -69,9 +71,11 @@ CREATE TABLE locacao (
     data_fim DATETIME,
     status VARCHAR(20) NOT NULL,
     observacoes VARCHAR(255),
-    criado_em DATETIME
+    criado_em DATETIME,
+    CONSTRAINT chk_status_locacao CHECK (status IN ('Ativa', 'Finalizada', 'Cancelada'))
 );
 GO
+
 
 CREATE TABLE item_locacao (
     id_item_locacao INT PRIMARY KEY IDENTITY(1,1),
@@ -92,9 +96,11 @@ CREATE TABLE manutencao (
     data_fim DATETIME,
     descricao VARCHAR(255),
     tipo VARCHAR(20) NOT NULL,
-    status VARCHAR(20) NOT NULL
+    status VARCHAR(20) NOT NULL,
+    CONSTRAINT chk_status_manutencao CHECK (status IN ('Aberta', 'Pendente', 'Concluída'))
 );
 GO
+
 
 -- ======================================
 -- 2. Índices (não únicos)
@@ -115,6 +121,24 @@ CREATE INDEX idx_locacao_id_agente ON locacao(id_agente);
 CREATE INDEX idx_manutencao_id_equipamento ON manutencao(id_equipamento);
 CREATE INDEX idx_manutencao_id_agente ON manutencao(id_agente);
 GO
+
+CREATE NONCLUSTERED INDEX idx_locacao_id_cliente ON locacao(id_cliente);
+CREATE NONCLUSTERED INDEX idx_locacao_status_datafim ON locacao(status, data_fim);
+
+CREATE NONCLUSTERED INDEX idx_item_locacao_id_equipamento ON item_locacao(id_equipamento);
+CREATE NONCLUSTERED INDEX idx_item_locacao_datas ON item_locacao(data_retirada, data_devolucao);
+
+CREATE NONCLUSTERED INDEX idx_locacao_id_locacao_status ON locacao(id_locacao, status);
+
+CREATE NONCLUSTERED INDEX idx_equipamento_tipo ON equipamento(id_tipo_equipamento);
+
+CREATE NONCLUSTERED INDEX idx_manutencao_id_equipamento ON manutencao(id_equipamento);
+CREATE NONCLUSTERED INDEX idx_manutencao_status ON manutencao(status);
+
+CREATE NONCLUSTERED INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);
+
+CREATE NONCLUSTERED INDEX idx_locacao_data_inicio ON locacao(data_inicio);
+CREATE NONCLUSTERED INDEX idx_manutencao_data_inicio ON manutencao(data_inicio);
 
 -- ======================================
 -- 3. Função
@@ -153,8 +177,8 @@ AS
 BEGIN
     IF EXISTS (
         SELECT 1 FROM inserted
-        WHERE (status IN ('finalizada', 'cancelada') AND data_fim IS NULL)
-           OR (status = 'ativa' AND data_fim IS NOT NULL)
+        WHERE (status IN ('Finalizada', 'Cancelada') AND data_fim IS NULL)
+           OR (status = 'Ativa' AND data_fim IS NOT NULL)
     )
     BEGIN
         RAISERROR('Data fim deve estar preenchida para status finalizada ou cancelada e nula para status ativa.', 16, 1);
@@ -185,7 +209,7 @@ BEGIN
         FROM item_locacao il
         INNER JOIN locacao l ON l.id_locacao = il.id_locacao
         WHERE il.id_equipamento = @id_equipamento
-          AND l.status = 'ativa'
+          AND l.status = 'Ativa'
           AND (
               (@data_inicio BETWEEN il.data_retirada AND ISNULL(il.data_devolucao, GETDATE())) OR
               (@data_fim BETWEEN il.data_retirada AND ISNULL(il.data_devolucao, GETDATE())) OR
