@@ -68,6 +68,7 @@ Passo a passo para rodar local na máquina:
 Vídeo de apoio para instalação de drivers: PHP [Instalando Drivers SQLSERVER no Xampp](https://www.youtube.com/watch?v=1XMpFd3WgaQ)
 
 Local: [C:\xampp\htdocs\projeto_aluguel_equipamentos](http://localhost/projeto_aluguel_equipamentos/crud-clientes/index.php)
+
 ...
 
 ### 🛠️ Ferramentas utilizadas
@@ -89,7 +90,7 @@ O relatório final está disponível no arquivo relatorio-final/template1.docx.
 
 ...
 
-### 📊 Referências
+### 📊 Referências principais
 
 - Vídeo: [Baixando e instalando o SQL Server Express e o SSMS (SQL Server Management Studio).](https://www.youtube.com/watch?v=BwnemvVholw&list=PLW83fkbt3BqmKH24X2ssolU1nWwIl-DUa)
 - Vídeo: [Instalação do SQL Server 2022 e SSMS no Windows](https://www.youtube.com/watch?v=QOXiRS1yWhE)
