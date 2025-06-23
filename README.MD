@@ -94,7 +94,12 @@ O relatório final está disponível no arquivo relatorio-final/template1.docx.
 
 ...
 
-### 📊 Referências principais
+### 🎞️ Slides
+O slide está disponível [aqui](https://docs.google.com/presentation/d/1xlzyd3S4egT4qjUBe42yQEdRWt5Wgvsq7QVuaO2WYNE/edit?usp=sharing)!
+
+...
+
+### 📚 Referências principais
 
 - Vídeo: [Baixando e instalando o SQL Server Express e o SSMS (SQL Server Management Studio).](https://www.youtube.com/watch?v=BwnemvVholw&list=PLW83fkbt3BqmKH24X2ssolU1nWwIl-DUa)
 - Vídeo: [Instalação do SQL Server 2022 e SSMS no Windows](https://www.youtube.com/watch?v=QOXiRS1yWhE)
