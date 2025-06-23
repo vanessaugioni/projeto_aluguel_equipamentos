@@ -63,3 +63,53 @@ Chaves de acesso:
 - item_locacao.id_equipamento
 - locacao.id_cliente
 */
+
+
+
+/*
+2 . Pergunta: Quais são os 5 equipamentos com maior número de locações no último ano, mostrando quantas 
+vezes foram alugados e em quantas locações diferentes apareceram?
+
+Aluno(a): Sabrina Lorenzon Bettiol
+*/
+WITH locacoes_recentes AS (
+    SELECT
+        il.id_equipamento,
+        COUNT(*) AS total_vezes_alugado,
+        COUNT(DISTINCT il.id_locacao) AS total_locacoes_diferentes
+    FROM item_locacao il
+    JOIN locacao l ON il.id_locacao = l.id_locacao
+    WHERE l.data_inicio >= DATEADD(YEAR, -1, GETDATE())
+    GROUP BY il.id_equipamento
+)
+SELECT TOP 5
+    e.nome_equipamento,
+    lr.total_vezes_alugado,
+    lr.total_locacoes_diferentes
+FROM locacoes_recentes lr
+JOIN equipamento e ON lr.id_equipamento = e.id_equipamento
+ORDER BY lr.total_vezes_alugado DESC;
+
+-- Indices essenciais:
+CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento ON item_locacao(id_equipamento);
+CREATE NONCLUSTERED INDEX idx_itemlocacao_idlocacao ON item_locacao(id_locacao);
+CREATE NONCLUSTERED INDEX idx_locacao_datainicio ON locacao(data_inicio);
+
+/*
+Índices utilizados:
+idx_locacao_datainicio = para filtrar o último ano
+idx_itemlocacao_idlocacao = JOIN entre item_locacao e locacao
+idx_itemlocacao_idequipamento = GROUP BY em equipamentoto
+
+Operadores principais:
+Index Seek em locacao.data_inicio
+Nested Loop Join entre item_locacao e locacao
+Hash Match para agrupamento e contagem
+
+Chaves de acesso:
+item_locacao.id_equipamento
+item_locacao.id_locacao
+locacao.data_inicio
+*/
+
+
