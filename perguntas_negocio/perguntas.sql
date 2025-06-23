@@ -126,14 +126,14 @@ CREATE NONCLUSTERED INDEX idx_locacao_datainicio ON locacao(data_inicio);
 
 /*
 Índices utilizados:
-idx_locacao_datainicio = para filtrar o último ano
-idx_itemlocacao_idlocacao = JOIN entre item_locacao e locacao
+idx_locacao_datainicio = para filtrar o último ano usando locacao.data_inicio
+idx_itemlocacao_idlocacao = JOIN entre item_locacao e locacao via id_locacao
 idx_itemlocacao_idequipamento = GROUP BY em equipamentoto
 
 Operadores principais:
-Index Seek em locacao.data_inicio
-Nested Loop Join entre item_locacao e locacao
-Hash Match para agrupamento e contagem
+Index Seek nos índices acima para busca eficiente
+Nested Loop Join para combinar as tabelas item_locacao e locacao
+Hash Match para agregação e contagem dos equipamentos alugados
 
 Chaves de acesso:
 item_locacao.id_equipamento
@@ -167,12 +167,12 @@ CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento_devolucao
 
 CREATE NONCLUSTERED INDEX idx_manutencao_idequipamento_datainicio_tipo
   ON manutencao(id_equipamento, data_inicio)
-  INCLUDE (tipo);
+  INCLUDE (tipo); /*não faz parte da chave de ordenação, mas está “anexada” no índice para evitar leitura extra da tabela (lookup). Usada para filtro ou condição.*/
 
 /*
 Índices utilizados:
-idx_itemlocacao_idequipamento_devolucao
-idx_manutencao_idequipamento_datainicio_tipo
+idx_itemlocacao_idequipamento_devolucao = Esse índice foi criado para acelerar consultas que filtram e fazem junção pela coluna id_equipamento e também consideram a data de devolução (data_devolucao).
+idx_manutencao_idequipamento_datainicio_tipo = Esse índice foi criado para acelerar buscas e junções na tabela manutencao utilizando as colunas id_equipamento e data_inicio.
 
 Chaves de acesso:
 item_locacao.id_equipamento
