@@ -107,22 +107,24 @@ GO
 -- ======================================
 
 CREATE NONCLUSTERED INDEX idx_locacao_id_cliente ON locacao(id_cliente);
+CREATE NONCLUSTERED INDEX idx_locacao_id_funcionario ON locacao(id_funcionario);
 CREATE NONCLUSTERED INDEX idx_locacao_status_datafim ON locacao(status, data_fim);
+CREATE NONCLUSTERED INDEX idx_locacao_id_locacao_status ON locacao(id_locacao, status);
 
+CREATE NONCLUSTERED INDEX idx_item_locacao_id_locacao ON item_locacao(id_locacao);
 CREATE NONCLUSTERED INDEX idx_item_locacao_id_equipamento ON item_locacao(id_equipamento);
 CREATE NONCLUSTERED INDEX idx_item_locacao_datas ON item_locacao(data_retirada, data_devolucao);
 
-CREATE NONCLUSTERED INDEX idx_locacao_id_locacao_status ON locacao(id_locacao, status);
 
 CREATE NONCLUSTERED INDEX idx_equipamento_tipo ON equipamento(id_tipo_equipamento);
 
-CREATE NONCLUSTERED INDEX idx_manutencao_id_equipamento ON manutencao(id_equipamento);
+CREATE NONCLUSTERED INDEX idx_manutencao_data_idequipamento ON manutencao (data_inicio, id_equipamento);
 CREATE NONCLUSTERED INDEX idx_manutencao_status ON manutencao(status);
 
 CREATE NONCLUSTERED INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);
 
-CREATE NONCLUSTERED INDEX idx_locacao_data_inicio ON locacao(data_inicio);
-CREATE NONCLUSTERED INDEX idx_manutencao_data_inicio ON manutencao(data_inicio);
+CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento ON item_locacao (id_equipamento);
+CREATE NONCLUSTERED INDEX idx_locacao_idcliente ON locacao (id_cliente);
 
 -- ======================================
 -- 3. Função

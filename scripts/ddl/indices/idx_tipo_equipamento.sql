@@ -1,0 +1,1 @@
+CREATE NONCLUSTERED INDEX idx_equipamento_tipo ON equipamento(id_tipo_equipamento);
