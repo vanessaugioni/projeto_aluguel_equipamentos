@@ -7,75 +7,91 @@
 Aluno(a): Vanessa Ugioni
 */
 
--- Código do select 
+-- Código com Stored Procedure
+-- Plano de Execução - Atalho (ctrl + M)
 
-WITH manut_recentes AS (
-    SELECT 
-        c.cnpj,
-        c.nome_cliente,
-        m.id_manutencao,
-        m.status
-    FROM manutencao m
-    JOIN equipamento e ON m.id_equipamento = e.id_equipamento
-    JOIN item_locacao il ON il.id_equipamento = e.id_equipamento
-    JOIN locacao l ON l.id_locacao = il.id_locacao
-    JOIN cliente c ON l.id_cliente = c.id_cliente
-    WHERE m.data_inicio >= DATEADD(MONTH, -6, GETDATE())
-),
-contagem_manut AS (
-    SELECT
-        cnpj,
-        nome_cliente,
-        COUNT(*) AS total_manut_abertas,
-        SUM(CASE WHEN status NOT IN ('Concluída', 'Cancelada') THEN 1 ELSE 0 END) AS manut_pendentes
-    FROM manut_recentes
-    GROUP BY cnpj, nome_cliente
-)
-SELECT TOP 3
-    cnpj AS CNPJ_Empresa,
-    nome_cliente AS Nome_Empresa,
-    total_manut_abertas AS Total_Manutencoes_6M,
-    manut_pendentes AS Manutencoes_Pendentes
-FROM contagem_manut
-ORDER BY total_manut_abertas DESC;
+CREATE OR ALTER PROCEDURE sp_ranking_manutencao_clientes
+AS
+BEGIN
+    SET NOCOUNT ON;
 
--- Indices essenciais
-
-IF EXISTS (SELECT name FROM sys.indexes WHERE name = 'idx_manutencao_data_idequipamento')
-    DROP INDEX idx_manutencao_data_idequipamento ON manutencao;
+    WITH manut_recentes AS (
+        SELECT 
+            c.cnpj,
+            c.nome_cliente,
+            m.id_manutencao,
+            m.status
+        FROM manutencao m
+        JOIN equipamento e ON m.id_equipamento = e.id_equipamento
+        JOIN item_locacao il ON il.id_equipamento = e.id_equipamento
+        JOIN locacao l ON l.id_locacao = il.id_locacao
+        JOIN cliente c ON l.id_cliente = c.id_cliente
+        WHERE m.data_inicio >= DATEADD(MONTH, -6, GETDATE())
+    ),
+    contagem_manut AS (
+        SELECT
+            cnpj,
+            nome_cliente,
+            COUNT(*) AS total_manut_abertas,
+            SUM(CASE WHEN status NOT IN ('Concluída', 'Cancelada') THEN 1 ELSE 0 END) AS manut_pendentes
+        FROM manut_recentes
+        GROUP BY cnpj, nome_cliente
+    )
+    SELECT TOP 3
+        cnpj AS CNPJ_Empresa,
+        nome_cliente AS Nome_Empresa,
+        total_manut_abertas AS Total_Manutencoes_6M,
+        manut_pendentes AS Manutencoes_Pendentes
+    FROM contagem_manut
+    ORDER BY total_manut_abertas DESC;
+END;
 GO
 
-IF EXISTS (SELECT name FROM sys.indexes WHERE name = 'idx_itemlocacao_idequipamento')
-    DROP INDEX idx_itemlocacao_idequipamento ON item_locacao;
-GO
-
-IF EXISTS (SELECT name FROM sys.indexes WHERE name = 'idx_locacao_idcliente')
-    DROP INDEX idx_locacao_idcliente ON locacao;
-GO
-
-CREATE NONCLUSTERED INDEX idx_manutencao_data_idequipamento ON manutencao (data_inicio, id_equipamento);
-CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento ON item_locacao (id_equipamento);
-CREATE NONCLUSTERED INDEX idx_locacao_idcliente ON locacao (id_cliente);
-
+EXEC sp_ranking_manutencao_clientes;
 
 /*
-Plano de Execução 
+1. Plano de Acesso utilizado:
 
-Índices utilizados:
-- idx_manutencao_data_idequipamento
-- idx_itemlocacao_idequipamento
-- idx_locacao_idcliente
+- A consulta usa predominantemente o operador Index Seek nos índices criados.
+- Por exemplo, o índice idx_manutencao_data_idequipamento é utilizado para filtrar rapidamente as 
+manutenções dos últimos 6 meses pela coluna data_inicio e para buscar por id_equipamento.
 
-Operadores principais identificados:
-- Index Seek em manutencao.data_inicio
-- Nested Loops nos joins
-- Hash Match para agregação na CTE
+2. Operadores usados:
 
-Chaves de acesso:
-- manutencao.id_equipamento
-- item_locacao.id_equipamento
-- locacao.id_cliente
+- Index Seek: Busca eficiente em índices não clusterizados para filtrar por data e fazer junções.
+- Nested Loops: Utilizado para realizar os joins entre tabelas (ex: entre manutencao e equipamento).
+- Hash Match: Usado para agregações e operações de agrupamento na CTE.
+
+3. Chaves dos índices utilizados:
+- Para o índice idx_manutencao_data_idequipamento — as chaves usadas são as colunas (data_inicio, id_equipamento).
+- Para idx_itemlocacao_idequipamento — a chave usada é id_equipamento.
+- Para idx_locacao_idcliente — a chave usada é id_cliente.
 */
+
+
+
+-- Indices essenciais:
+-- Índice 1: manutencao (data_inicio, id_equipamento)
+CREATE NONCLUSTERED INDEX idx_manutencao_data_idequipamento 
+ON manutencao (data_inicio, id_equipamento);
+-- Justificativa:
+-- Este índice melhora o desempenho do filtro por data de início nas manutenções (últimos 6 meses)
+-- e otimiza o join com a tabela equipamento por id_equipamento.
+
+-- Índice 2: item_locacao (id_equipamento)
+CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento 
+ON item_locacao (id_equipamento);
+-- Justificativa:
+-- Permite que o SQL Server localize rapidamente todos os registros de locação
+-- de um equipamento específico, melhorando o desempenho do join com a tabela equipamento.
+
+-- Índice 3: locacao (id_cliente)
+CREATE NONCLUSTERED INDEX idx_locacao_idcliente 
+ON locacao (id_cliente);
+-- Justificativa:
+-- Otimiza o join com a tabela cliente para obter o CNPJ e nome da empresa.
+-- Também acelera agrupamentos e filtros por cliente em consultas analíticas.
+
 
 
 
