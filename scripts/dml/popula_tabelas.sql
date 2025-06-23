@@ -1,5 +1,4 @@
 -- Populando cliente
--- Populando cliente
 SET IDENTITY_INSERT cliente ON
 GO
 INSERT cliente (id_cliente, nome_cliente, cnpj, email, telefone, criado_em) VALUES 
