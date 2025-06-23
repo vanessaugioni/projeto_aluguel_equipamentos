@@ -10,6 +10,8 @@ Aluno(a): Vanessa Ugioni
 -- Código com Stored Procedure
 -- Plano de Execução - Atalho (ctrl + M)
 
+SET SHOWPLAN_ALL ON
+
 CREATE OR ALTER PROCEDURE sp_ranking_manutencao_clientes
 AS
 BEGIN
@@ -67,7 +69,6 @@ manutenções dos últimos 6 meses pela coluna data_inicio e para buscar por id_
 - Para idx_itemlocacao_idequipamento — a chave usada é id_equipamento.
 - Para idx_locacao_idcliente — a chave usada é id_cliente.
 */
-
 
 
 -- Indices essenciais:

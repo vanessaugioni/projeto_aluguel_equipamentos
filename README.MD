@@ -32,7 +32,7 @@ Arquivo fonte: [Modelo físico](https://dbdiagram.io/d/683e357061dc3bf08d3ad679)
 
 ### 📖 Dicionário de dados
 
-As informações sobre as tabelas e índices foram documentados na planilha colocar link aqui!!!!!
+[➡️ Acesse o dicionário de dados .xlsx](./dicionario_dados/dicionario_de_dados.xlsx)
 
 ...
 

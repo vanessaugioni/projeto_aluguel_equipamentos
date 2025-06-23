@@ -20,6 +20,7 @@ CREATE TABLE cliente (
     telefone CHAR(11) UNIQUE,                  
     criado_em DATETIME
 );
+GO
 
 CREATE TABLE funcionario_cliente (
     id_funcionario INT PRIMARY KEY IDENTITY(1,1),
@@ -121,9 +122,6 @@ CREATE NONCLUSTERED INDEX idx_manutencao_data_idequipamento ON manutencao (data_
 CREATE NONCLUSTERED INDEX idx_manutencao_status ON manutencao(status);
 
 CREATE NONCLUSTERED INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);
-
-CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento ON item_locacao (id_equipamento);
-CREATE NONCLUSTERED INDEX idx_locacao_idcliente ON locacao (id_cliente);
 
 -- ======================================
 -- 3. Função
