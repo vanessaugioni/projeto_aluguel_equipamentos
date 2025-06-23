@@ -53,7 +53,7 @@ Abaixo, segue os scripts SQL separados por tipo:
 
 ### 💻 Código Fonte do CRUD
 
-
+C:\xampp\htdocs\projeto_aluguel_equipamentos
 ...
 
 ### 🛠️ Ferramentas utilizadas
