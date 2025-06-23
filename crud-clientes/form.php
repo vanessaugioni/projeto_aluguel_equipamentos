@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </label><br>
 
         <label>Telefone:
-            <input type="text" name="telefone" maxlength="11" minlength="10" value="<?= htmlspecialchars($cliente['telefone'] ?? '') ?>">
+            <input type="text" name="telefone" required maxlength="11" minlength="10" value="<?= htmlspecialchars($cliente['telefone'] ?? '') ?>">
         </label><br>
 
         <button type="submit"><?= $id ? "Atualizar" : "Cadastrar" ?></button>

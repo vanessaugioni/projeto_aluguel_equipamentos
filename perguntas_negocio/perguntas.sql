@@ -40,6 +40,19 @@ FROM contagem_manut
 ORDER BY total_manut_abertas DESC;
 
 -- Indices essenciais
+
+IF EXISTS (SELECT name FROM sys.indexes WHERE name = 'idx_manutencao_data_idequipamento')
+    DROP INDEX idx_manutencao_data_idequipamento ON manutencao;
+GO
+
+IF EXISTS (SELECT name FROM sys.indexes WHERE name = 'idx_itemlocacao_idequipamento')
+    DROP INDEX idx_itemlocacao_idequipamento ON item_locacao;
+GO
+
+IF EXISTS (SELECT name FROM sys.indexes WHERE name = 'idx_locacao_idcliente')
+    DROP INDEX idx_locacao_idcliente ON locacao;
+GO
+
 CREATE NONCLUSTERED INDEX idx_manutencao_data_idequipamento ON manutencao (data_inicio, id_equipamento);
 CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento ON item_locacao (id_equipamento);
 CREATE NONCLUSTERED INDEX idx_locacao_idcliente ON locacao (id_cliente);
