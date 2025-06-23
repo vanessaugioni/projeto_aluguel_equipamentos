@@ -94,7 +94,7 @@ O relatório final está disponível no arquivo relatorio-final/template1.docx.
 
 ...
 
-### 🎞️ Slides
+### 🎞️ Slide apresentação
 O slide está disponível [aqui](https://docs.google.com/presentation/d/1xlzyd3S4egT4qjUBe42yQEdRWt5Wgvsq7QVuaO2WYNE/edit?usp=sharing)!
 
 ...
