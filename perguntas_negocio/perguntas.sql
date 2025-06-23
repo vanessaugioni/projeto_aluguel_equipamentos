@@ -44,3 +44,22 @@ CREATE NONCLUSTERED INDEX idx_manutencao_data_idequipamento ON manutencao (data_
 CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento ON item_locacao (id_equipamento);
 CREATE NONCLUSTERED INDEX idx_locacao_idcliente ON locacao (id_cliente);
 
+
+/*
+Plano de Execução 
+
+Índices utilizados:
+- idx_manutencao_data_idequipamento
+- idx_itemlocacao_idequipamento
+- idx_locacao_idcliente
+
+Operadores principais identificados:
+- Index Seek em manutencao.data_inicio
+- Nested Loops nos joins
+- Hash Match para agregação na CTE
+
+Chaves de acesso:
+- manutencao.id_equipamento
+- item_locacao.id_equipamento
+- locacao.id_cliente
+*/
