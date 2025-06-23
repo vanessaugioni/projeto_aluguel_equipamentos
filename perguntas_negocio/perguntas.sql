@@ -112,4 +112,46 @@ item_locacao.id_locacao
 locacao.data_inicio
 */
 
+/*
+3 . Pergunta: Qual é o tempo médio (em dias) entre a devolução de um equipamento e o início da sua próxima manutenção corretiva?
+*/
+WITH devolucoes_e_manutencoes AS (
+    SELECT
+        il.id_equipamento,
+        il.data_devolucao,
+        m.data_inicio,
+        DATEDIFF(DAY, il.data_devolucao, m.data_inicio) AS dias_entre
+    FROM item_locacao il
+    JOIN manutencao m ON il.id_equipamento = m.id_equipamento
+    WHERE 
+        il.data_devolucao IS NOT NULL
+        AND m.tipo = 'corretiva'
+        AND m.data_inicio > il.data_devolucao
+)
+SELECT 
+    ROUND(AVG(CAST(dias_entre AS FLOAT)), 2) AS media_dias_entre_devolucao_e_manutencao
+FROM devolucoes_e_manutencoes
+WHERE dias_entre BETWEEN 0 AND 60;
+-- Indices essenciais:
+CREATE NONCLUSTERED INDEX idx_itemlocacao_idequipamento_devolucao
+  ON item_locacao(id_equipamento, data_devolucao);
 
+CREATE NONCLUSTERED INDEX idx_manutencao_idequipamento_datainicio_tipo
+  ON manutencao(id_equipamento, data_inicio)
+  INCLUDE (tipo);
+
+/*
+Índices utilizados:
+idx_itemlocacao_idequipamento_devolucao
+idx_manutencao_idequipamento_datainicio_tipo
+
+Chaves de acesso:
+item_locacao.id_equipamento
+manutencao.id_equipamento
+manutencao.tipo
+
+Operadores:
+Index Seek nos dois índices
+Nested Loops para cruzamento dos equipamentos
+Compute Scalar para cálculo do DATEDIFF e média
+*/
