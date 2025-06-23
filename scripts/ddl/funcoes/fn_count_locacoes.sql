@@ -24,7 +24,7 @@ SELECT dbo.fn_total_locacoes_por_cliente(5) AS total_locacoes;
 
 
 /*
-Justificativa da escolha 
+JUSTIFICATIVA: 
 
 A função fn_total_locacoes_por_cliente foi criada para retornar o total de locações feitas por um cliente específico. 
 Essa função é útil para consultas rápidas e relatórios de uso, permitindo identificar quantas vezes um cliente utilizou nosso serviço de alocação de equipamentos.
