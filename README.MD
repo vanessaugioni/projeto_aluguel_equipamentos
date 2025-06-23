@@ -69,6 +69,10 @@ Vídeo de apoio para instalação de drivers: PHP [Instalando Drivers SQLSERVER 
 
 Local: [C:\xampp\htdocs\projeto_aluguel_equipamentos](http://localhost/projeto_aluguel_equipamentos/crud-clientes/index.php)
 
+Aplicação funcional com CRUD:
+
+![alt text](uso_CRUD.gif)
+
 ...
 
 ### 🛠️ Ferramentas utilizadas
