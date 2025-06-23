@@ -49,12 +49,17 @@ VALUES (
 /*
 JUSTIFICATIVA: 
 
-Essa trigger foi criada para garantir a consistência entre o status da locação e o preenchimento da data de término (data_fim). 
-No sistema de alocação de equipamentos, é essencial que:
+Essa trigger garante a coerência e a integridade das informações operacionais relacionadas ao ciclo de vida das locações de equipamentos. 
+No contexto da empresa, onde os equipamentos são entregues, utilizados e devolvidos sob demanda, é essencial que o sistema refita corretamente o status real de cada locação.
 
-- Quando uma locação for finalizada ou cancelada, a data_fim esteja preenchida;
-- Quando a locação estiver ativa, a data_fim ainda deve estar em branco (NULL).
+Ao impedir inconsistências como:
 
-A trigger impede que registros inconsistentes sejam inseridos ou atualizados no banco, evitando erros em relatórios, 
-faturamento e controle de disponibilidade de equipamentos.
+- Locações encerradas sem data de término, ou
+- Locações ativas com data de término definida,
+
+Se a locação está com status 'Finalizada' ou 'Cancelada', o campo data_fim não pode ser nulo.
+- Justificativa: significa que a locação foi encerrada e, portanto, a data de término deve estar registrada.
+
+Se a locação está com status 'Ativa', o campo data_fim deve ser nulo.
+- Justificativa: a locação ainda está em andamento, então não faz sentido já haver uma data de término.
 */ 
