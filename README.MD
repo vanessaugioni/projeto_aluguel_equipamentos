@@ -43,6 +43,7 @@ Para este projeto foi utilizado o banco de dados Azure SQL.
 Abaixo, segue os scripts SQL separados por tipo:
 
 - [Tabelas;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/tabelas)
+- [Perguntas de negócio;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/perguntas_negocio)
 - [Índices;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/indices)
 - [Gatilhos;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/gatilhos)
 - [Procedimentos armazenados;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/procedimentos-armazenados)
@@ -106,6 +107,7 @@ O slide está disponível [aqui](https://docs.google.com/presentation/d/1xlzyd3S
 - Vídeo: [Aprenda git em 30 minutos - os principais comandos git](https://www.youtube.com/watch?v=Zwv9qRyVeU4)
 - Vídeo: [12 dicas de Boas Práticas em Modelagem de Dados](https://www.youtube.com/watch?v=ppA649f48e8) | Ví só algumas partes
 - Vídeo: [Instalando Drivers SQLSERVER no Xampp](https://www.youtube.com/watch?v=1XMpFd3WgaQ)
+- Vídeo: [Query Tuning 2a Parte - Plano de Execução | SQL Server Expert](https://www.youtube.com/watch?v=WpfNqO20jrc&t=113s)
 - Site: [O que é a normalização de bases de dados e como fazê-la?](https://ebaconline.com.br/blog/normalizacao-de-bases-de-dados)
 - Site: [Índices clusterizados e não clusterizados](https://learn.microsoft.com/pt-br/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described?view=sql-server-ver17)
 - Site: [Otimizando o SQL Server: Compreendendo loops aninhados, correspondência de hash, junção de mesclagem e junção adaptável](https://rafaelrampineli.medium.com/optimizing-sql-server-joins-understanding-nested-loops-hash-match-merge-join-and-adaptive-join-5ba57fcf6ec3)
