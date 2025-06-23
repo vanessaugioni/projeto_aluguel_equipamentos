@@ -1,2 +1,2 @@
-CREATE INDEX idx_funcionario_cliente_email ON funcionario_cliente(email);
-CREATE INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);
+CREATE NONCLUSTERED INDEX idx_funcionario_cliente_email ON funcionario_cliente(email);
+CREATE NONCLUSTERED INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);

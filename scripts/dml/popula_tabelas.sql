@@ -152,6 +152,14 @@ INSERT manutencao (id_manutencao, id_equipamento, id_agente, data_inicio, data_f
 (9, 9, 9, DATEADD(day, -7, GETDATE()), NULL, 'Troca de bateria do nobreak', 'preventiva', 'pendente'),
 (10, 10, 10, DATEADD(day, -14, GETDATE()), DATEADD(day, -9, GETDATE()), 'Limpeza e manutenção geral', 'corretiva', 'finalizada'),
 (11, 11, 11, DATEADD(day, -9, GETDATE()), NULL, 'Digitalização de documentos com scanner', 'preventiva', 'pendente')
+(12, 1, 2, DATEADD(DAY, -10, GETDATE()), NULL, 'Troca de teclado', 'corretiva', 'pendente'),
+(13, 1, 3, DATEADD(DAY, -30, GETDATE()), NULL, 'Atualização de sistema', 'preventiva', 'pendente'),
+(14, 1, 4, DATEADD(DAY, -45, GETDATE()), NULL, 'Substituição de HD', 'corretiva', 'pendente'),
+(15, 12, 1, DATEADD(DAY, -5, GETDATE()), NULL, 'Manutenção em porta USB', 'corretiva', 'pendente'),
+(16, 12, 2, DATEADD(DAY, -20, GETDATE()), NULL, 'Reinstalação do Windows', 'preventiva', 'pendente'),
+(17, 13, 3, DATEADD(DAY, -12, GETDATE()), NULL, 'Substituição de bateria', 'corretiva', 'pendente'),
+(18, 13, 4, DATEADD(DAY, -18, GETDATE()), NULL, 'Manutenção de tela', 'corretiva', 'pendente'),
+(19, 1, 1, DATEADD(day, -15, GETDATE()), NULL, 'Substituição de teclado danificado', 'preventiva', 'finalizada'),
 GO
 SET IDENTITY_INSERT manutencao OFF
 GO

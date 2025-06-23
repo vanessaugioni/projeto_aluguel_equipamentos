@@ -1,1 +1,1 @@
-CREATE INDEX idx_agente_email ON agente(email);
+CREATE NONCLUSTERED INDEX idx_agente_email ON agente(email);
