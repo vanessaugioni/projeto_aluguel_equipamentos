@@ -53,7 +53,21 @@ Abaixo, segue os scripts SQL separados por tipo:
 
 ### 💻 Código Fonte do CRUD
 
-C:\xampp\htdocs\projeto_aluguel_equipamentos
+Nosso projeto foi desenvolvido utilizando PHP, rodando em um ambiente local configurado com XAMPP, que inclui o servidor Apache e o PHP. Para o banco de dados, utilizamos o Azure SQL, aproveitando a escalabilidade e segurança da plataforma em nuvem da Microsoft. Essa combinação permite um desenvolvimento ágil e a integração eficiente entre a aplicação e o banco de dados.
+
+Passo a passo para rodar local na máquina: 
+
+1. Passo: Instale o XAMPP (Apache + PHP + drivers php); 
+2. Passo: Configure o banco Azure SQL e crie a base de dados; 
+3. Passo: Instale os drivers sqlsrv no PHP (coloque as DLLs em php\ext e habilite no php.ini); 
+4. Reinicie o Apache no XAMPP.
+5. Coloque os arquivos do projeto na pasta htdocs.
+6. Acesse pelo navegador em http://localhost/projeto_aluguel_equipamentos/crud-clientes/index.php
+7. Use o sistema CRUD para gerenciar clientes.
+
+Vídeo de apoio para instalação de drivers: PHP [Instalando Drivers SQLSERVER no Xampp](https://www.youtube.com/watch?v=1XMpFd3WgaQ)
+
+Local: [C:\xampp\htdocs\projeto_aluguel_equipamentos](http://localhost/projeto_aluguel_equipamentos/crud-clientes/index.php)
 ...
 
 ### 🛠️ Ferramentas utilizadas
@@ -63,6 +77,7 @@ C:\xampp\htdocs\projeto_aluguel_equipamentos
 - dbdiagram.io; 
 - Google docs (relatório final); 
 - Google apresentação (slide); 
+- XAMPP (desenvolvimento web local)
 - Wpp e Meet (Comunicação interna)
 - Github (repositório e board de issues)
 - Google AI Studio (conferência de dados, resumo e explicações e apoio na conectividade do banco)
