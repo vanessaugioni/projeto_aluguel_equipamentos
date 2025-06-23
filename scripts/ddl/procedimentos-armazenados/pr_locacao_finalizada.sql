@@ -1,4 +1,4 @@
-DROP PROCEDURE IF EXISTS sp_finalizar_locacao
+DROP PROCEDURE IF EXISTS sp_finalizar_locacao;
 GO
 
 CREATE PROCEDURE sp_finalizar_locacao
@@ -7,7 +7,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Verifica se a locação existe e está ativa
     IF EXISTS (
         SELECT 1 FROM locacao
         WHERE id_locacao = @id_locacao AND status = 'ativa'
@@ -25,5 +24,5 @@ BEGIN
     BEGIN
         PRINT 'Locação não encontrada ou já finalizada.';
     END
-END
+END;
 GO

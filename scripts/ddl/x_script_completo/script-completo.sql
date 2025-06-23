@@ -1,10 +1,3 @@
--- ==============================
--- Script de Criação Completo
--- Projeto: Sistema de Locação de Equipamentos
--- Compatível com: Azure SQL Database
--- Gerado em: 2025-06-22 15:43:49
--- ==============================
-
 -- ======================================
 -- 1. Tabelas
 -- ======================================
@@ -107,10 +100,20 @@ GO
 -- 2. Índices (não únicos)
 -- ======================================
 
+CREATE INDEX idx_agente_email ON agente(email);
 CREATE INDEX idx_cliente_email ON cliente(email);
-CREATE INDEX idx_funcionario_email ON funcionario_cliente(email);
-CREATE INDEX idx_equipamento_status ON equipamento(status);
-CREATE INDEX idx_locacao_status ON locacao(status);
+CREATE INDEX idx_cliente_cnpj ON cliente(cnpj);
+CREATE INDEX idx_equipamento_numero_serie ON equipamento(numero_serie);
+CREATE INDEX idx_equipamento_id_tipo ON equipamento(id_tipo_equipamento);
+CREATE INDEX idx_funcionario_cliente_email ON funcionario_cliente(email);
+CREATE INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);
+CREATE INDEX idx_item_locacao_id_locacao ON item_locacao(id_locacao);
+CREATE INDEX idx_item_locacao_id_equipamento ON item_locacao(id_equipamento);
+CREATE INDEX idx_locacao_id_cliente ON locacao(id_cliente);
+CREATE INDEX idx_locacao_id_funcionario ON locacao(id_funcionario);
+CREATE INDEX idx_locacao_id_agente ON locacao(id_agente);
+CREATE INDEX idx_manutencao_id_equipamento ON manutencao(id_equipamento);
+CREATE INDEX idx_manutencao_id_agente ON manutencao(id_agente);
 GO
 
 -- ======================================
@@ -140,28 +143,27 @@ GO
 -- 4. Gatilho
 -- ======================================
 
-DROP TRIGGER IF EXISTS trg_finalizar_locacao;
+DROP TRIGGER IF EXISTS trg_locacao_data_fim_valida
 GO
 
-CREATE TRIGGER trg_finalizar_locacao
+CREATE TRIGGER trg_locacao_data_fim_valida
 ON locacao
-AFTER UPDATE
+AFTER INSERT, UPDATE
 AS
 BEGIN
     IF EXISTS (
-        SELECT 1
-        FROM inserted i
-        WHERE i.status = 'finalizada' AND i.data_fim IS NULL
+        SELECT 1 FROM inserted
+        WHERE (status IN ('finalizada', 'cancelada') AND data_fim IS NULL)
+           OR (status = 'ativa' AND data_fim IS NOT NULL)
     )
     BEGIN
-        UPDATE locacao
-        SET data_fim = GETDATE()
-        FROM locacao l
-        INNER JOIN inserted i ON l.id_locacao = i.id_locacao
-        WHERE l.status = 'finalizada' AND l.data_fim IS NULL;
+        RAISERROR('Data fim deve estar preenchida para status finalizada ou cancelada e nula para status ativa.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
     END
-END;
+END
 GO
+
 
 -- ======================================
 -- 5. Procedimentos Armazenados
@@ -193,23 +195,5 @@ BEGIN
     BEGIN
         PRINT 'Locação não encontrada ou já finalizada.';
     END
-END;
-GO
-
-DROP PROCEDURE IF EXISTS pr_imc;
-GO
-
-CREATE PROCEDURE pr_imc (
-    @massa NUMERIC(10,2),
-    @altura NUMERIC(10,2),
-    @resultado NUMERIC(10,2) OUTPUT
-)
-AS
-BEGIN
-    DECLARE @altura_quadrado NUMERIC(10,2);
-
-    SELECT @altura_quadrado = POWER(@altura, 2);
-
-    SELECT @resultado = @massa / @altura_quadrado;
 END;
 GO

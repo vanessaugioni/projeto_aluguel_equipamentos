@@ -1,4 +1,4 @@
-DROP FUNCTION IF EXISTS fn_total_locacoes_por_cliente
+DROP FUNCTION IF EXISTS fn_total_locacoes_por_cliente;
 GO
 
 CREATE FUNCTION fn_total_locacoes_por_cliente (
@@ -7,12 +7,12 @@ CREATE FUNCTION fn_total_locacoes_por_cliente (
 RETURNS INT
 AS
 BEGIN
-    DECLARE @total INT
+    DECLARE @total INT;
 
     SELECT @total = COUNT(*)
     FROM locacao
-    WHERE id_cliente = @id_cliente
+    WHERE id_cliente = @id_cliente;
 
-    RETURN @total
-END
+    RETURN @total;
+END;
 GO
