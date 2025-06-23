@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title><?= $id ? "Editar" : "Novo" ?> Cliente</title>
+    <link rel="stylesheet" href="form-styles.css" />
 </head>
 <body>
     <h1><?= $id ? "Editar" : "Novo" ?> Cliente</h1>
@@ -50,21 +51,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="post" action="">
-        <label>Nome:<br>
+        <label>Nome:
             <input type="text" name="nome_cliente" required value="<?= htmlspecialchars($cliente['nome_cliente'] ?? '') ?>">
-        </label><br><br>
+        </label><br>
 
-        <label>CNPJ:<br>
+        <label>CNPJ:
             <input type="text" name="cnpj" required maxlength="14" minlength="14" value="<?= htmlspecialchars($cliente['cnpj'] ?? '') ?>">
-        </label><br><br>
+        </label><br>
 
-        <label>Email:<br>
+        <label>Email:
             <input type="email" name="email" required value="<?= htmlspecialchars($cliente['email'] ?? '') ?>">
-        </label><br><br>
+        </label><br>
 
-        <label>Telefone:<br>
+        <label>Telefone:
             <input type="text" name="telefone" maxlength="11" minlength="10" value="<?= htmlspecialchars($cliente['telefone'] ?? '') ?>">
-        </label><br><br>
+        </label><br>
 
         <button type="submit"><?= $id ? "Atualizar" : "Cadastrar" ?></button>
     </form>
