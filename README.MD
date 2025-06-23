@@ -1,4 +1,4 @@
-## Projeto alocação de equipamentos - Grupo C
+## 📁 Projeto alocação de equipamentos - Grupo C
 
 Este projeto consiste na criação de um **modelo físico de um banco de dados** para um sistema de alocação de equipamento. O projeto foi desenvolvido em **com PHP e SQL server**, criando um **CRUD** para cadastro dos clientes, que são as empresas que contratam nossos serviços de alocação de equipamentos.  
 
@@ -18,9 +18,9 @@ Somos uma empresa que oferece a alocação de equipamentos e periféricos, como 
 - Keller - [Keler1606](https://github.com/Keler1606)  
 - Ana Paula - [anapaulagesser](https://github.com/anapaulagesser)  
 
-...
+---
 
-### Modelo Físico
+### 🗂 Modelo Físico
 
 Utilizamos a ferramenta de modelagem de dados [dbdiagram.io](https://dbdiagram.io/d/683e357061dc3bf08d3ad679) para criação do modelo físico do banco de dados, para posterior exportação dos scripts DDL das tabelas e relacionamentos.
 
@@ -28,24 +28,45 @@ Arquivo fonte: [Modelo físico](https://dbdiagram.io/d/683e357061dc3bf08d3ad679)
 
 ![alt text](image.png)
 
+---
 
-
-### Dicionário de dados
+### 📖 Dicionário de dados
 
 As informações sobre as tabelas e índices foram documentados na planilha colocar link aqui!!!!!
 
+---
 
-### Scripts SQL
+### 💾 Scripts SQL
 
 Para este projeto foi utilizado o banco de dados Azure SQL. 
 
 Abaixo, segue os scripts SQL separados por tipo:
 
-- [Tabelas](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/tabelas)
-- [Índices](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/indices)
-- [Gatilhos](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/gatilhos)
-- [Procedimentos armazenados](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/procedimentos-armazenados)
-- [Funções](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/funcoes)
-- [DML](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/dml)
+- [Tabelas;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/tabelas)
+- [Índices;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/indices)
+- [Gatilhos;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/gatilhos)
+- [Procedimentos armazenados;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/procedimentos-armazenados)
+- [Funções;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/ddl/funcoes)
+- [DML;](https://github.com/vanessaugioni/projeto_aluguel_equipamentos/tree/main/scripts/dml)
 
-### Scripts SQL
+---
+
+### 💻 Código Fonte do CRUD
+
+
+---
+
+### 🛠️ Ferramentas utilizadas
+
+- Azure SQL;
+- SQL Server Management Studio 21; 
+- dbdiagram.io; 
+- Google docs (relatório final); 
+- Google apresentação (slide); 
+- Wpp e Meet (Comunicação interna)
+- Github (repositpório e board de issues)
+
+---
+
+### 📊 Relatório Final 
+O relatório final está disponível no arquivo relatorio-final/template1.docx.
