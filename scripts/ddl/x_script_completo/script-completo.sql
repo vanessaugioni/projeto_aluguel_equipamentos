@@ -97,7 +97,7 @@ CREATE TABLE manutencao (
     descricao VARCHAR(255),
     tipo VARCHAR(20) NOT NULL,
     status VARCHAR(20) NOT NULL,
-    CONSTRAINT chk_status_manutencao CHECK (status IN ('Aberta', 'Pendente', 'Concluída'))
+    CONSTRAINT chk_status_manutencao CHECK (status IN ('Pendente', 'Concluída', 'Cancelada'))
 );
 GO
 
@@ -105,22 +105,6 @@ GO
 -- ======================================
 -- 2. Índices (não únicos)
 -- ======================================
-
-CREATE INDEX idx_agente_email ON agente(email);
-CREATE INDEX idx_cliente_email ON cliente(email);
-CREATE INDEX idx_cliente_cnpj ON cliente(cnpj);
-CREATE INDEX idx_equipamento_numero_serie ON equipamento(numero_serie);
-CREATE INDEX idx_equipamento_id_tipo ON equipamento(id_tipo_equipamento);
-CREATE INDEX idx_funcionario_cliente_email ON funcionario_cliente(email);
-CREATE INDEX idx_funcionario_cliente_id_cliente ON funcionario_cliente(id_cliente);
-CREATE INDEX idx_item_locacao_id_locacao ON item_locacao(id_locacao);
-CREATE INDEX idx_item_locacao_id_equipamento ON item_locacao(id_equipamento);
-CREATE INDEX idx_locacao_id_cliente ON locacao(id_cliente);
-CREATE INDEX idx_locacao_id_funcionario ON locacao(id_funcionario);
-CREATE INDEX idx_locacao_id_agente ON locacao(id_agente);
-CREATE INDEX idx_manutencao_id_equipamento ON manutencao(id_equipamento);
-CREATE INDEX idx_manutencao_id_agente ON manutencao(id_agente);
-GO
 
 CREATE NONCLUSTERED INDEX idx_locacao_id_cliente ON locacao(id_cliente);
 CREATE NONCLUSTERED INDEX idx_locacao_status_datafim ON locacao(status, data_fim);
@@ -144,50 +128,61 @@ CREATE NONCLUSTERED INDEX idx_manutencao_data_inicio ON manutencao(data_inicio);
 -- 3. Função
 -- ======================================
 
-DROP FUNCTION IF EXISTS fn_total_locacoes_por_cliente;
+DROP FUNCTION IF EXISTS fn_total_locacoes_por_cliente_com_nome;
 GO
 
-CREATE FUNCTION fn_total_locacoes_por_cliente (
+CREATE FUNCTION fn_total_locacoes_por_cliente_com_nome(
     @id_cliente INT
 )
-RETURNS INT
+RETURNS TABLE
 AS
-BEGIN
-    DECLARE @total INT;
-
-    SELECT @total = COUNT(*)
-    FROM locacao
-    WHERE id_cliente = @id_cliente;
-
-    RETURN @total;
-END;
+RETURN
+(
+    SELECT 
+        c.id_cliente,
+        c.nome_cliente,
+        COUNT(l.id_locacao) AS total_locacoes
+    FROM cliente c
+    LEFT JOIN locacao l ON l.id_cliente = c.id_cliente
+    WHERE c.id_cliente = @id_cliente
+    GROUP BY c.id_cliente, c.nome_cliente
+);
 GO
+
 
 -- ======================================
 -- 4. Gatilho
 -- ======================================
 
-DROP TRIGGER IF EXISTS trg_locacao_data_fim_valida
+DROP TRIGGER IF EXISTS trg_valida_data_fim_locacao;
 GO
 
-CREATE TRIGGER trg_locacao_data_fim_valida
+CREATE TRIGGER trg_valida_data_fim_locacao
 ON locacao
 AFTER INSERT, UPDATE
 AS
 BEGIN
+    SET NOCOUNT ON;
     IF EXISTS (
-        SELECT 1 FROM inserted
-        WHERE (status IN ('Finalizada', 'Cancelada') AND data_fim IS NULL)
-           OR (status = 'Ativa' AND data_fim IS NOT NULL)
+        SELECT 1
+        FROM inserted
+        WHERE status IN ('Finalizada', 'Cancelada')
+        AND data_fim IS NULL
     )
     BEGIN
-        RAISERROR('Data fim deve estar preenchida para status finalizada ou cancelada e nula para status ativa.', 16, 1);
-        ROLLBACK TRANSACTION;
-        RETURN;
-    END
-END
+        THROW 50000, 'Data fim deve estar preenchida para status Finalizada ou Cancelada.', 1;
+    END;
+    IF EXISTS (
+        SELECT 1
+        FROM inserted
+        WHERE status = 'Ativa'
+        AND data_fim IS NOT NULL
+    )
+    BEGIN
+        THROW 50000, 'Data fim deve ser nula para status Ativa.', 1;
+    END;
+END;
 GO
-
 
 -- ======================================
 -- 5. Procedimentos Armazenados
@@ -209,7 +204,7 @@ BEGIN
         FROM item_locacao il
         INNER JOIN locacao l ON l.id_locacao = il.id_locacao
         WHERE il.id_equipamento = @id_equipamento
-          AND l.status = 'Ativa'
+          AND l.status = 'ativa'
           AND (
               (@data_inicio BETWEEN il.data_retirada AND ISNULL(il.data_devolucao, GETDATE())) OR
               (@data_fim BETWEEN il.data_retirada AND ISNULL(il.data_devolucao, GETDATE())) OR

@@ -4,6 +4,6 @@ CREATE TABLE funcionario_cliente (
     email VARCHAR(150) NOT NULL UNIQUE,
     telefone CHAR(11),
     cargo VARCHAR(50),
-    id_cliente INT NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+    id_cliente INT NOT NULL FOREIGN KEY REFERENCES cliente(id_cliente)
 );
+GO

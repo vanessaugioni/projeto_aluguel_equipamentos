@@ -27,7 +27,7 @@ contagem_manut AS (
         cnpj,
         nome_cliente,
         COUNT(*) AS total_manut_abertas,
-        SUM(CASE WHEN status NOT IN ('finalizada', 'cancelada') THEN 1 ELSE 0 END) AS manut_pendentes
+        SUM(CASE WHEN status NOT IN ('Concluída', 'Cancelada') THEN 1 ELSE 0 END) AS manut_pendentes
     FROM manut_recentes
     GROUP BY cnpj, nome_cliente
 )

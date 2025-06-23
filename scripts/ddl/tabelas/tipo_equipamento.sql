@@ -3,3 +3,4 @@ CREATE TABLE tipo_equipamento (
     nome_tipo VARCHAR(50) NOT NULL,
     descricao VARCHAR(255)
 );
+GO

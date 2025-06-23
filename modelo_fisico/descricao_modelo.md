@@ -38,20 +38,12 @@ As tabelas utilizam chaves primárias simples (`int auto increment`) e os demais
 Atendida.  
 Não há dependências transitivas. Todos os atributos não-chave dependem apenas da chave primária.
 
----
-
-## Pontos de Desnormalização Justificada
-
-### 1. Campos de status e tipo como `varchar(20)`
-
-Exemplos: `status` em `equipamento`, `locacao`, `manutencao`; `tipo` em `manutencao`.
-
-**Justificativa:**  
-Optou-se por manter os campos diretamente como texto por simplicidade. Como os valores possíveis são limitados e controlados na aplicação, não foi criada uma tabela auxiliar para esses dados.
 
 ---
 
-### 2. Campos de contato repetidos em várias tabelas
+## Pontos de Desnormalização Justificada 
+
+### Campos de contato repetidos em várias tabelas
 
 Exemplos: `telefone`, `email` em `cliente`, `funcionario_cliente` e `agente`.
 
@@ -59,6 +51,13 @@ Exemplos: `telefone`, `email` em `cliente`, `funcionario_cliente` e `agente`.
 Manter essas informações nas próprias tabelas facilita a leitura e o uso, especialmente em sistemas de pequeno porte ou acadêmicos. A centralização em uma tabela de contatos foi evitada para não aumentar a complexidade.
 
 ---
+
+## Validações e decisões de modelagem para campos de status e tipo
+
+### Validação de tipo varchar(20) e possuem restrições CHECK
+ 
+Os campos de status nas tabelas equipamento, locacao e manutencao são do tipo varchar(20) e possuem restrições CHECK para garantir que somente valores válidos sejam armazenados. Essa abordagem assegura integridade dos dados sem a complexidade de tabelas auxiliares para tipos e status. O campo tipo em manutencao é mantido livre para permitir maior flexibilidade e controle na aplicação.
+
 
 ## Conclusão
 

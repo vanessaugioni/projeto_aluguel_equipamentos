@@ -1,7 +1,7 @@
 <?php
-$serverName = "satc-sql-server.database.windows.net"; // Nome do seu servidor Azure
+$serverName = "vanessa-sql-server.database.windows.net"; // Nome do seu servidor Azure
 $connectionOptions = [
-    "Database" => "banco-dados",       // Nome exato do seu banco
+    "Database" => "banco_projeto",       // Nome exato do seu banco
     "Uid" => "admin_user",             // Usuário administrador
     "PWD" => "satc@123",               // Senha do usuário
     "Encrypt" => true,                 

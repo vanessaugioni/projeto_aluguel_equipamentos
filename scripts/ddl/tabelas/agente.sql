@@ -6,3 +6,4 @@ CREATE TABLE agente (
     cargo VARCHAR(50),
     criado_em DATETIME
 );
+GO

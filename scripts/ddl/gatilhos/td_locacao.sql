@@ -1,31 +1,48 @@
-DROP TRIGGER IF EXISTS trg_locacao_data_fim_valida
+DROP TRIGGER IF EXISTS trg_valida_data_fim_locacao;
 GO
 
-CREATE TRIGGER trg_locacao_data_fim_valida
+CREATE TRIGGER trg_valida_data_fim_locacao
 ON locacao
 AFTER INSERT, UPDATE
 AS
 BEGIN
+    SET NOCOUNT ON;
+
+    -- Verifica registros com status 'Finalizada' ou 'Cancelada' mas com data_fim nula
     IF EXISTS (
-        SELECT 1 FROM inserted
-        WHERE (status IN ('finalizada', 'cancelada') AND data_fim IS NULL)
-           OR (status = 'ativa' AND data_fim IS NOT NULL)
+        SELECT 1
+        FROM inserted
+        WHERE status IN ('Finalizada', 'Cancelada')
+        AND data_fim IS NULL
     )
     BEGIN
-        RAISERROR('Data fim deve estar preenchida para status finalizada ou cancelada e nula para status ativa.', 16, 1);
-        ROLLBACK TRANSACTION;
-        RETURN;
-    END
-END
+        THROW 50000, 'Data fim deve estar preenchida para status Finalizada ou Cancelada.', 1;
+    END;
+
+    -- Verifica registros com status 'Ativa' mas com data_fim preenchida
+    IF EXISTS (
+        SELECT 1
+        FROM inserted
+        WHERE status = 'Ativa'
+        AND data_fim IS NOT NULL
+    )
+    BEGIN
+        THROW 50000, 'Data fim deve ser nula para status Ativa.', 1;
+    END;
+END;
 GO
 
 
+
 -- Exemplo que DISPARA o trigger 
-UPDATE locacao
-SET 
-    status = 'finalizada',
-    data_fim = NULL
-WHERE id_locacao = 1;  -- ID de uma alocação ativa com data_fim = null
+INSERT INTO locacao (
+    id_cliente, id_funcionario, id_agente,
+    data_inicio, data_fim, status, observacoes, criado_em
+)
+VALUES (
+    1, 1, 1,
+    GETDATE(), NULL, 'Finalizada', 'Teste com erro', GETDATE()
+); -- Msg 50000, Nível 16, Estado 1, Data fim deve estar preenchida para status finalizada ou cancelada e nula para status ativa.
 
 
 
